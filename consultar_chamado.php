@@ -1,5 +1,17 @@
 <?php require_once "validador_acesso.php"; ?>
 
+<?php 
+  $arquivo = fopen('arquivo.hd', 'r');
+  /*funcao feof procura o fim do arquivo, passar ela negada como parametro, 
+  garante que haja leitura das linhas, pois ela retorna false quando há linha com carater.
+  Por isso passar negado,pra inverter pra true pra imprimir cada linha.
+  
+  */
+  while (!feof($arquivo)) {//função usada para encontrar final do arquivo
+    fgets($arquivo);
+  }
+?>
+
 <html>
   <head>
     <meta charset="utf-8" />
