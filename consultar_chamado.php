@@ -1,15 +1,30 @@
 <?php require_once "validador_acesso.php"; ?>
 
 <?php 
+
+  $chamados = array();
+
   $arquivo = fopen('arquivo.hd', 'r');
   /*funcao feof procura o fim do arquivo, passar ela negada como parametro, 
   garante que haja leitura das linhas, pois ela retorna false quando há linha com carater.
-  Por isso passar negado,pra inverter pra true pra imprimir cada linha.
-  
+  Por isso passar negado,pra inverter pra true pra imprimir cada linha.  
   */
   while (!feof($arquivo)) {//função usada para encontrar final do arquivo
-    fgets($arquivo);
+    $registro = fgets($arquivo);
+    $registro_detalhes = explode('#', $registro);
+
+    if ($_SESSION['perfil_id'] == 2) {
+      if ($_SESSION['id'] != $registro_detalhes[0]) {
+        continue;
+      }else{
+        $chamados[] = $registro; 
+      }
+    }else{
+      $chamados[] = $registro;
+    }    
   }
+
+  fclose();//fechar arquivo
 ?>
 
 <html>
@@ -52,24 +67,25 @@
             </div>
             
             <div class="card-body">
-              
-              <div class="card mb-3 bg-light">
-                <div class="card-body">
-                  <h5 class="card-title">Título do chamado...</h5>
-                  <h6 class="card-subtitle mb-2 text-muted">Categoria</h6>
-                  <p class="card-text">Descrição do chamado...</p>
 
+              <?php foreach($chamados as $chamado) {// instrução php?>
+                <?php 
+                  $chamado_dados = explode('#', $chamado);
+
+                  if (count($chamado_dados) < 3) {
+                    continue;
+                  }
+                ?>
+                
+                <div class="card mb-3 bg-light">
+                  <div class="card-body">
+                    <h5 class="card-title"><?= $chamado_dados[1] ?></h5>
+                    <h6 class="card-subtitle mb-2 text-muted"><?= $chamado_dados[2] ?></h6>
+                    <p class="card-text"><?= $chamado_dados[3] ?></p>
+
+                  </div>
                 </div>
-              </div>
-
-              <div class="card mb-3 bg-light">
-                <div class="card-body">
-                  <h5 class="card-title">Título do chamado...</h5>
-                  <h6 class="card-subtitle mb-2 text-muted">Categoria</h6>
-                  <p class="card-text">Descrição do chamado...</p>
-
-                </div>
-              </div>
+              <?php } ?>
 
               <div class="row mt-5">
                 <div class="col-6">
