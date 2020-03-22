@@ -4,13 +4,17 @@ Por se tratar de um app para aprendizado, alguns conceitos mais avançados como 
 Alguns arquivos importantes como o de validação de login está incluso junto da aplicação no diretório público, mas o ideal é que os arquivos de vital importância como por exemplo os de regra de negócios fique fora da pasta publica, para que possa estar atrás do firewall do sistema operacional.
 
 ##Tela de login
+
 ![](imgs/20200321-232856.png)
 
 ##Tela principal
+
 ![](imgs/20200321-233151.png)
 
 ##Tela de criação de chamados
+
 ![](imgs/20200321-233315.png)
 
 ##Tela de consulta de chamados
+
 ![](imgs/20200321-233426.png)
